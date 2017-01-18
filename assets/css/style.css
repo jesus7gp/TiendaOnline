@@ -1,0 +1,122 @@
+body{
+	background-image: url('../img/fondo1.jpg');
+	/* Background image is centered vertically and horizontally at all times */
+  background-position: center center;
+  
+  /* Background image doesn't tile */
+  background-repeat: no-repeat;
+  
+  /* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+  background-attachment: fixed;
+  
+  /* This is what makes the background image rescale based
+     on the container's size */
+  background-size: cover;
+  
+  /* Set a background color that will be displayed
+     while the background image is loading */
+  background-color: #464646;
+  color: white;
+}
+
+.titulo{
+	background: rgba(41, 43, 44, 0.9);
+}
+
+a.disabled {
+    pointer-events: none;
+}
+a:hover{
+  color: lightgreen;
+  text-decoration: none;
+}
+.redondo{
+  width: 240px;
+  height: 240px;
+  padding: 60px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 120px;
+  background: rgba(41, 43, 44, 0.9);
+  border-color: rgba(41, 43, 44, 0.9);
+}
+
+.prod{
+background: rgba(41, 43, 44, 0.9);
+color: white;
+min-height: 100%;
+}
+
+.sesion{
+  width: 100%;
+}
+
+.redondo:hover{
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms--transform: rotate(360deg);
+	transform: rotate(360deg);
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.volver:hover{
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms--transform: rotate(360deg);
+	transform: rotate(360deg);
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.marco{
+	border-width: 10px;
+	border-color: white;
+	border-style: solid;
+	border-radius: 12px;
+}
+.centrado{
+	margin: auto;
+	text-align: center;
+}
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    background: rgba(41, 43, 44, 0.9);
+}
+
+ul.pagination li {
+    display: inline;
+    color: white;
+    float: left;
+
+    text-decoration: none;
+
+}
+
+ul.pagination li a {
+    color: white;
+    float: left;
+    padding: 12px 24px;
+    text-decoration: none;
+
+}
+
+ul.pagination li.active {
+    background-color: #ddd;
+    padding: 12px 24px;
+    color: black;
+}
+
+ul.pagination li a:hover:not(.active) {
+    background-color: #ddd;
+    color:black;
+}
