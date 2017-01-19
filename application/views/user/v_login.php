@@ -6,7 +6,7 @@
 	<a class="h5" href="<?php echo base_url('index.php/ctrl_user/registro') ?>">¿Aún no está registrado?</a><br><br>
 		<fieldset class="form-group">
 			<label for="">Usuario:</label>
-			<input type="text" name="nombre" placeholder="Introduzca nombre de usuario" class="form-control" value=""><br>
+			<input type="text" name="usuario" placeholder="Introduzca nombre de usuario" class="form-control" value=""><br>
 		</fieldset>
 		<fieldset class="form-group">
 			<label for="">Clave:</label>

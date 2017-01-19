@@ -5,11 +5,41 @@ class Ctrl_user extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->library('form_validation');
+		//$this->load->library('session');
 		$this->load->model('model_user');
-				
-		$this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('user/v_login', null,TRUE)
-			));
+	
+		if (!$this->input->post()){		
+			$this->load->view('templates/layout', array(
+				'cuerpo'=>$this->load->view('user/v_login', null,TRUE)
+				));
+		}
+		else{
+			$usuario = $this->model_user->CompruebaUsuario($this->input->post());
+			if($usuario){
+				$newdata = array(
+        			'nombre'     => $usuario['nombre'],
+        			'id' => $usuario['id']
+				);
+				$this->session->set_userdata($newdata);
+				redirect(base_url());
+			}
+			else{
+				$this->load->view('templates/layout', array(
+				'mensaje'=>$this->load->view('templates/mensaje', array('tipo'=>'danger','mensaje'=>'Usuario no registrado.'),TRUE),	
+				'cuerpo'=>$this->load->view('user/v_login', null,TRUE)
+				));
+			}
+			
+			
+			
+		}
+	}
+
+	public function logout(){
+		$this->session->unset_userdata('nombre');
+		$this->session->unset_userdata('id');
+		redirect(base_url());
 	}
 
 	public function registro(){
@@ -39,14 +69,15 @@ class Ctrl_user extends CI_Controller {
 			));
         }
         else {
-            unset($_POST['repclave']);
             $this->model_user->InsertaUsuario($this->input->post());
 
-            $this->load->model('model_categorias');
-			$listaCategorias = $this->model_categorias->ListaCategorias();
-			$this->load->view('templates/layout', array(
-				'cuerpo'=>$this->load->view('v_portada', array('ListaCategorias'=>$listaCategorias),TRUE)
-			));
+            $usuario = $this->model_user->CompruebaUsuario($this->input->post());
+            $newdata = array(
+        			'nombre'     => $usuario['nombre'],
+        			'id' => $usuario['id']
+				);
+			$this->session->set_userdata($newdata);
+			redirect(base_url());
 
         }
 

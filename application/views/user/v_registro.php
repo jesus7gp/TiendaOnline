@@ -1,26 +1,3 @@
-	<!-- 
-	Nombre de usuario
-
-	Email
-
-	Contraseña
-
-	Repetir contraseña
-
-	Nombre
-
-	Apellidos
-
-	DNI
-
-	Provincia
-
-	Dirección
-
-	Código postal
-
-	-->
-<body>
 <div class="container">
 <br>
 <div class="row">
@@ -32,13 +9,13 @@
 <div class="col-md-6">
 	<fieldset class="form-group">
 		<label for="">Nombre de usuario:</label>
-		<input type="text" name="usuario" class="form-control" value="">
+		<input type="text" name="usuario" class="form-control" value="<?=set_value('usuario')?>">
 		<?=form_error('usuario')?>
 	</fieldset></div>
 	<div class="col-md-6">
 	<fieldset class="form-group">
 		<label for="">Email:</label>
-		<input type="text" name="correo" class="form-control" value="">
+		<input type="text" name="correo" class="form-control" value="<?=set_value('correo')?>">
 		<?=form_error('correo')?>
 	</fieldset></div>
 </div>
@@ -46,13 +23,13 @@
 <div class="col-md-6">
 	<fieldset class="form-group">
 		<label for="">Contraseña:</label>
-		<input type="password" name="clave" class="form-control" value="">
+		<input type="password" name="clave" class="form-control" value="<?=set_value('clave')?>">
 		<?=form_error('clave')?>
 	</fieldset></div>
 <div class="col-md-6">	
 	<fieldset class="form-group">
 		<label for="">Confirmar contraseña:</label>
-		<input type="password" name="repclave" class="form-control" value="">
+		<input type="password" name="repclave" class="form-control" value="<?=set_value('repclave')?>">
 		<?=form_error('repclave')?>
 	</fieldset></div>
 </div>
@@ -60,20 +37,20 @@
 <div class="col-md-4">
 	<fieldset class="form-group">
 		<label for="">Nombre:</label>
-		<input type="text" name="nombre" class="form-control" value="">
+		<input type="text" name="nombre" class="form-control" value="<?=set_value('nombre')?>">
 		<?=form_error('nombre')?>
 	</fieldset></div>
 	<div class="col-md-8">
 	<fieldset class="form-group">
 		<label for="">Apellidos:</label>
-		<input type="text" name="apellidos" class="form-control" value="">
+		<input type="text" name="apellidos" class="form-control" value="<?=set_value('apellidos')?>">
 		<?=form_error('apellidos')?>
 	</fieldset></div></div>
 	<div class="row">
 <div class="col-md-4">
 	<fieldset class="form-group">
 		<label for="">DNI:</label>
-		<input type="text" name="dni" class="form-control" value="">
+		<input type="text" name="dni" class="form-control" value="<?=set_value('dni')?>">
 		<?=form_error('dni')?>
 	</fieldset>
 	</div>
@@ -86,12 +63,12 @@
 	<div class="col-md-4">
 	<fieldset class="form-group">
 		<label for="">Código postal:</label>
-		<input type="text" name="cp" class="form-control" value="">
+		<input type="text" name="cp" class="form-control" value="<?=set_value('cp')?>">
 		<?=form_error('cp')?>
 	</fieldset></div></div>
 	<fieldset class="form-group">
 		<label for="">Dirección:</label>
-		<input type="text" name="direccion" class="form-control" value="">
+		<input type="text" name="direccion" class="form-control" value="<?=set_value('direccion')?>">
 		<?=form_error('direccion')?>
 	</fieldset>
 	<button class="btn btn-primary sesion" type="submit">Finalizar registro</button>
@@ -104,4 +81,3 @@
 <div class="col-md-3"></div>
 </div>
 </div>
-</body>

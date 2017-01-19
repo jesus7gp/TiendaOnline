@@ -1,0 +1,1 @@
+<div class="alert alert-<?=$tipo?>" role="alert"><strong><?=$mensaje?></strong></div>

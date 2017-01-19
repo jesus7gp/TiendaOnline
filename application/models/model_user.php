@@ -13,7 +13,11 @@ class Model_user extends CI_Model {
 		$datos['activo'] = 1;
 		$this->db->insert('usuario',$datos);
 	}
-	
+
+	public function CompruebaUsuario($datos){
+		$query = $this->db->get_where('usuario', array('usuario'=>$datos['usuario'], 'clave'=>md5($datos['clave'])));
+		return $query->row_array();	
+	}
 
 }
 

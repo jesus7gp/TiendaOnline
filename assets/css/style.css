@@ -19,13 +19,19 @@ body{
   background-color: #464646;
   color: white;
 }
-
+.dropdown-menu { 
+  left: -10%;
+}
 .titulo{
 	background: rgba(41, 43, 44, 0.9);
 }
 
 a.disabled {
     pointer-events: none;
+}
+
+.modal{
+  color: black;
 }
 a:hover{
   color: lightgreen;
