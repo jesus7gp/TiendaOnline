@@ -11,6 +11,19 @@ class Model_productos extends CI_Model {
 		$query = $this->db->get_where('producto', array('categoria'=>$id));
 		return $query->result_array();
 	}
+	public function Destacados($inicio, $tamano){
+		$this->db->limit($inicio, $tamano);		
+		$query = $this->db->get_where('producto', array('destacado'=>1));
+		return $query->result_array();
+	}
+
+	public function TotalDestacados(){
+		$this->db->select('producto.*');
+		$this->db->from('producto');	
+		$this->db->where('producto.oculto', 1);
+		$this->db->where('producto.destacado', 1);
+		return $this->db->count_all_results();
+	}
 	public function EligeProducto($id){		
 		$query = $this->db->get_where('producto', array('id'=>$id));
 		return $query->row_array();

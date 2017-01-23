@@ -36,6 +36,17 @@ class Ctrl_user extends CI_Controller {
 		}
 	}
 
+	public function EditarDatos(){
+		$this->load->model('model_provincias');
+		$this->load->model('model_user');
+		$this->load->library('form_validation');
+		$listaProvincias = $this->model_provincias->ListaProvincias();
+		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
+		$this->load->view('templates/layout', array(	
+				'cuerpo'=>$this->load->view('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias),TRUE)
+				));
+	}
+
 	public function logout(){
 		$this->session->unset_userdata('nombre');
 		$this->session->unset_userdata('id');

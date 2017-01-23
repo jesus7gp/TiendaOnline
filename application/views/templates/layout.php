@@ -28,7 +28,7 @@
 ¡Hola, <strong><?php echo $this->session->userdata('nombre');?></strong>!
 </a>
 	<div class="dropdown-menu" aria-labelledby="Preview">
-	<a class="dropdown-item" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> Mi cuenta</a>
+	<a class="dropdown-item" href="<?php echo base_url('index.php/ctrl_user/EditarDatos') ?>"><i class="fa fa-user-circle" aria-hidden="true"></i> Mi cuenta</a>
 	<a class="dropdown-item" href="#"><i class="fa fa-truck" aria-hidden="true"></i> Mis pedidos</a>
 	<a class="dropdown-item" data-toggle="modal" data-target="#flipFlop" href=""><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
 	</div>

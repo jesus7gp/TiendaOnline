@@ -19,6 +19,15 @@ class Model_user extends CI_Model {
 		return $query->row_array();	
 	}
 
+	public function UsuarioID($id){
+		$query = $this->db->get_where('usuario', array('id'=>$id));
+		return $query->row_array();
+	}
+
+	public function CambiaDatos($id, $datos){
+		$this->db->update('usuario', $datos, $id);
+	}
+
 }
 
 /* End of file model_user.php */

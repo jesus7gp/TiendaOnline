@@ -2,7 +2,7 @@
 <div class="container">
 <?php echo anchor(
 				'ctrl_portada/categoria/'.$producto["categoria"], 
-				'<i class="fa fa-times" aria-hidden="true"></i>', 
+				'<i class="fa fa-arrow-left" aria-hidden="true"></i><strong> Categoría</strong>', 
 				'class="btn btn-secondary volver"');
 			?>
 	<div class="row centrado">
@@ -23,8 +23,7 @@
 						?>
 						<div class="alert alert-danger" role="alert"><strong>No disponible</strong></div>
 						<h3><?=$producto['precioventa'] ?> €</h3>
-						<a class="btn btn-primary disabled" href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito
-</a>
+						<a class="btn btn-primary disabled" href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 				?>

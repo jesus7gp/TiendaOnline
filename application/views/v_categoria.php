@@ -30,14 +30,12 @@
 				<?php 
 					if($producto['stock']>0){
 						?>
-							<a class="btn btn-primary" href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito
-</a>
+							<a class="btn btn-primary" href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 					else{
 						?>
-							<a class="btn btn-primary disabled"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito
-</a>
+							<a class="btn btn-primary disabled"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 				?>
