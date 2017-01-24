@@ -2,7 +2,6 @@
 /**
  * Libreria donde estan las funciones del carrito
  */
- 
 class Carrito
 {
  

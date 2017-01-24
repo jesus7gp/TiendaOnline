@@ -1,5 +1,6 @@
 <div class="container">
-	<div class="row centrado"><!--<div class="jumbotron titulo"><h3>Categorías</h3></div>-->
+	<div class="row centrado">
+	<hr><h1>Categorías</h1><hr>
 	<?php foreach($ListaCategorias as $categoria){ ?>
 		<div class="col-md-4"><br><br>			
 			<?php echo anchor(
@@ -14,7 +15,7 @@
 	</div>
 <br/><br/>
 
-	<div class="row centrado"><hr><h1>Destacados</h1>
+	<div class="row centrado"><hr><h1>Destacados</h1><hr>
 	<?php foreach($destacados as $producto){ ?>
 		<div class="col-md-4"><br>			
 			<div class="card card-block prod">

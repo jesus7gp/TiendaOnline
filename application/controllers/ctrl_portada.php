@@ -5,6 +5,7 @@ class Ctrl_portada extends CI_Controller {
 
 	public function index()
 	{
+		$carrito = new Carrito();
 		$this->load->model('model_categorias');
 		$this->load->model('model_productos');
 		$this->conf_pagDes();
@@ -13,12 +14,14 @@ class Ctrl_portada extends CI_Controller {
 		$pag = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$destacados = $this->model_productos->Destacados($this->pagination->per_page, $pag);
 		$this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('v_portada', array('ListaCategorias'=>$listaCategorias, 'destacados'=>$destacados),TRUE)
+			'cuerpo'=>$this->load->view('v_portada', array('ListaCategorias'=>$listaCategorias, 'destacados'=>$destacados),TRUE),
+			'carrito'=>$carrito
 			));
 		
 	}
 
 	public function categoria(){
+		$carrito = new Carrito();
 		$this->load->model('model_categorias');
 		$this->load->model('model_productos');
 		$this->conf_pag();
@@ -27,18 +30,20 @@ class Ctrl_portada extends CI_Controller {
 		$productos = $this->model_productos->ListaProductos($this->uri->segment(3),$this->pagination->per_page, $pag);
 		
 		$this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('v_categoria', array('categoria' => $categoriaporid, 'ListaProductos' => $productos),TRUE)
+			'cuerpo'=>$this->load->view('v_categoria', array('categoria' => $categoriaporid, 'ListaProductos' => $productos),TRUE),
+			'carrito'=>$carrito
 			));
 	}
 
 	public function producto(){
-		
+		$carrito = new Carrito();
 		$this->load->model('model_productos');
 		
 		$productoid = $this->model_productos->EligeProducto($this->uri->segment(3));
 			
 		$this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('v_producto', array('producto' => $productoid),TRUE)
+			'cuerpo'=>$this->load->view('v_producto', array('producto' => $productoid),TRUE),
+			'carrito'=>$carrito
 			));
 	}
 
@@ -77,7 +82,7 @@ class Ctrl_portada extends CI_Controller {
 		
 		$config['base_url'] = base_url('index.php/ctrl_portada/index/');
 		$config['total_rows'] = $this->model_productos->TotalDestacados();
-		$config['per_page'] = 3;
+		$config['per_page'] = 6;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 1;
 		$config['full_tag_open'] = '<ul class="pagination">';

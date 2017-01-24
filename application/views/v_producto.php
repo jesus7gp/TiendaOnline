@@ -16,7 +16,7 @@
 						<div class="alert alert-success" role="alert"><strong>En stock</strong></div>
 						<h3><?=$producto['precioventa'] ?> €</h3>
 						
-						<a class="btn btn-primary" href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
+						<a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'])?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 					else{

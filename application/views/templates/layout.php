@@ -39,7 +39,7 @@
 	</li>
 	<?php endif; ?>
 	<li class="nav-item">
-		<a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+		<a class="nav-link" href="<?=base_url('index.php/ctrl_carrito')?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <?=$carrito->articulos_total()?> ítems</a>
 	</li>
 </ul>
 <!-- The modal -->

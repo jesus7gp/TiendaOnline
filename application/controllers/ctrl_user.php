@@ -6,12 +6,13 @@ class Ctrl_user extends CI_Controller {
 	public function index()
 	{
 		$this->load->library('form_validation');
-		//$this->load->library('session');
+		
 		$this->load->model('model_user');
 	
 		if (!$this->input->post()){		
 			$this->load->view('templates/layout', array(
-				'cuerpo'=>$this->load->view('user/v_login', null,TRUE)
+				'cuerpo'=>$this->load->view('user/v_login', null,TRUE),
+			'carrito'=>$carrito
 				));
 		}
 		else{
@@ -27,7 +28,8 @@ class Ctrl_user extends CI_Controller {
 			else{
 				$this->load->view('templates/layout', array(
 				'mensaje'=>$this->load->view('templates/mensaje', array('tipo'=>'danger','mensaje'=>'Usuario no registrado.'),TRUE),	
-				'cuerpo'=>$this->load->view('user/v_login', null,TRUE)
+				'cuerpo'=>$this->load->view('user/v_login', null,TRUE),
+			'carrito'=>$carrito
 				));
 			}
 			
@@ -43,7 +45,8 @@ class Ctrl_user extends CI_Controller {
 		$listaProvincias = $this->model_provincias->ListaProvincias();
 		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
 		$this->load->view('templates/layout', array(	
-				'cuerpo'=>$this->load->view('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias),TRUE)
+				'cuerpo'=>$this->load->view('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias),TRUE),
+			'carrito'=>$carrito
 				));
 	}
 
@@ -76,7 +79,8 @@ class Ctrl_user extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
             $this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('user/v_registro', array('ListaProvincias' => $listaProvincias),TRUE)
+			'cuerpo'=>$this->load->view('user/v_registro', array('ListaProvincias' => $listaProvincias),TRUE),
+			'carrito'=>$carrito
 			));
         }
         else {
