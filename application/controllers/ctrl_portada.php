@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ctrl_portada extends CI_Controller {
 
+	/**
+	 *
+	 * En el index se carga la portada con destacados y categorías
+	 *
+	 */
 	public function index()
 	{
 		$carrito = new Carrito();

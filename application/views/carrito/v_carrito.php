@@ -28,7 +28,7 @@
             <?php foreach($carro as $producto):?>
                 <tr>
                     <td><a href="<?=base_url('index.php/ctrl_carrito/Remove_producto/'.$producto['unique_id'])?>" class="btn btn-danger cantip"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
-                    <td><?=$producto["nombre"]?></td>
+                    <td><a class="h6" href="<?=base_url('index.php/ctrl_portada/producto/'.$producto['id']) ?>"><?=$producto["nombre"]?></a></td>
                     <td>
                         <?=$producto["cantidad"]?>
                         <div class="btn-group">
@@ -49,5 +49,8 @@
             </tbody>
         </table>
     </div>
-    <a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Destroy')?>">Vaciar carrito</a><br/><br/>
+    <div class="btn-group">
+    <a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Destroy')?>">Vaciar carrito</a>
+    <a class="btn btn-success" href="<?=base_url()?>">Finalizar pedido</a>
+    </div><br/><br/>
 </div>

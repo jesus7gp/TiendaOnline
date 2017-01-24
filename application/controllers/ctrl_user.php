@@ -57,6 +57,7 @@ class Ctrl_user extends CI_Controller {
 	}
 
 	public function registro(){
+		$carrito = new Carrito();
 		$this->load->model('model_provincias');
 		$this->load->model('model_user');
 		$this->load->library('form_validation');
@@ -65,7 +66,7 @@ class Ctrl_user extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 
  ', '</div>');
-		$this->form_validation->set_rules('usuario', 'usuario', 'required');
+		$this->form_validation->set_rules('usuario', 'usuario', 'required|is_unique[usuario.usuario]',array('is_unique'=>'El usuario ya existe.'));
 		$this->form_validation->set_rules('correo', 'email', 'required|valid_email');
 		$this->form_validation->set_rules('clave', 'contraseña', 'required');
 		$this->form_validation->set_rules('repclave', 'confirmar contraseña', 'required|matches[clave]');

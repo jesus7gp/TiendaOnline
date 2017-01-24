@@ -21,6 +21,7 @@
 <nav class="navbar navbar-dark bg-inverse">
 <!-- Navbar content -->
 <a class="navbar-brand mb-0" href="<?php echo base_url() ?>"><i class="fa fa-music" aria-hidden="true"></i>	MusicOnline</a>
+<!--EL USUARIO SÍ HA INICIADO SESIÓN********************************************************************************************************************************************-->
 <ul class="nav navbar-nav pull-xs-right">
 	<?php if($this->session->has_userdata('id')): ?>
 	<li class="nav-item dropdown">
@@ -33,16 +34,17 @@
 	<a class="dropdown-item" data-toggle="modal" data-target="#flipFlop" href=""><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
 	</div>
 	</li>
+<!--EL USUARIO NO HA INICIADO SESIÓN********************************************************************************************************************************************-->	
 	<?php else: ?>
 	<li class="nav-item">
 		<a class="nav-link" href="<?php echo base_url('index.php/ctrl_user') ?>">Iniciar sesión</a>
 	</li>
 	<?php endif; ?>
 	<li class="nav-item">
-		<a class="nav-link" href="<?=base_url('index.php/ctrl_carrito')?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <?=$carrito->articulos_total()?> ítems</a>
+		<a class="nav-link" href="<?=base_url('index.php/ctrl_carrito')?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <?=$carrito->articulos_total()?> ítem(s)</a>
 	</li>
 </ul>
-<!-- The modal -->
+<!--MODAL DE CONFIRMACIÓN CERRAR SESIÓN********************************************************************************************************************************************-->
 <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -63,12 +65,14 @@
 	</div>
 </div>
 </nav>
+<!--MENSAJE EN LA PLANTILLA********************************************************************************************************************************************-->
 <div id="mensaje">
 <?php if (isset($mensaje)){
 	echo $mensaje;
 }
 ?>
 </div>
+<!--CUERPO DE LA PLANTILLA********************************************************************************************************************************************-->
 <div id="cuerpo">
 	<?=$cuerpo?>
 </div>
