@@ -5,24 +5,41 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Producto</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
+                    <th>Subtotal</th>
+                    <th></th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
                     <th></th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                     <th>TOTAL: <?=$carrito->precio_total().' €'?></th>
+                    <th></th>
                 </tr>
             </tfoot>
             <tbody>
             <?php if($carro):?>
             <?php foreach($carro as $producto):?>
                 <tr>
+                    <td><a href="<?=base_url('index.php/ctrl_carrito/Remove_producto/'.$producto['unique_id'])?>" class="btn btn-danger cantip"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
                     <td><?=$producto["nombre"]?></td>
-                    <td><?=$producto["cantidad"]?></td>
+                    <td>
+                        <?=$producto["cantidad"]?>
+                        <div class="btn-group">
+                        <?php if($producto['cantidad']>1): ?>
+                        <a href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'].'/'.-1)?>" class="btn btn-danger cantip"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                    <?php endif; ?>
+                        <a href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'])?>" class="btn btn-success cantip"><i class="fa fa-plus" aria-hidden="true"></i>
+</a>
+                        </div>
+                    </td>
+                    <td><?=$producto["precio"]?></td>
                     <td><?=$producto["precio"]*$producto["cantidad"].' €'?></td>
                 </tr>
             <?php endforeach;?>

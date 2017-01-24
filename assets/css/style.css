@@ -54,6 +54,15 @@ a:hover{
   border-color: rgba(41, 43, 44, 0.9);
 }
 
+.cantip{
+  padding: 4px;
+  background: transparent;
+  border-style: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}
+
 .prod{
 background: rgba(41, 43, 44, 0.9);
 color: white;

@@ -27,7 +27,7 @@
 				<?php 
 					if($producto['stock']>0){
 						?>
-							<a class="btn btn-primary" href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
+							<a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'])?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 					else{

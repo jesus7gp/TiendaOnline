@@ -5,6 +5,7 @@ class Ctrl_user extends CI_Controller {
 
 	public function index()
 	{
+		$carrito = new Carrito();
 		$this->load->library('form_validation');
 		
 		$this->load->model('model_user');
@@ -31,14 +32,12 @@ class Ctrl_user extends CI_Controller {
 				'cuerpo'=>$this->load->view('user/v_login', null,TRUE),
 			'carrito'=>$carrito
 				));
-			}
-			
-			
-			
+			}			
 		}
 	}
 
 	public function EditarDatos(){
+		$carrito = new Carrito();
 		$this->load->model('model_provincias');
 		$this->load->model('model_user');
 		$this->load->library('form_validation');
@@ -51,6 +50,7 @@ class Ctrl_user extends CI_Controller {
 	}
 
 	public function logout(){
+		$carrito = new Carrito();
 		$this->session->unset_userdata('nombre');
 		$this->session->unset_userdata('id');
 		redirect(base_url());
