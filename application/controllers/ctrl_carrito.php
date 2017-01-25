@@ -2,14 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ctrl_carrito extends CI_Controller {
-
+	public function __construct()
+		{
+			parent::__construct();
+			$this->load->model('model_categorias');
+			
+		}	
 	public function index()
 	{
 		$carrito = new Carrito();
-		$this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('carrito/v_carrito',array('carrito'=>$carrito),TRUE),
-			'carrito'=>$carrito
-			));
+		$this->load->CargaVista('carrito/v_carrito',array('carrito'=>$carrito));
 	}
 
 	/**

@@ -1,21 +1,6 @@
+<div class="jumbotron titulo" style="text-align: center"><h1><i class="fa fa-music" aria-hidden="true"></i> MusicOnline</h1><p>Productos destacados</p></div>
 <div class="container">
 	<div class="row centrado">
-	<hr><h1>Categorías</h1><hr>
-	<?php foreach($ListaCategorias as $categoria){ ?>
-		<div class="col-md-4"><br><br>			
-			<?php echo anchor(
-				'ctrl_portada/categoria/'.$categoria["id"], 
-				$categoria["nombre"].'
-				<br>
-				<i class="fa fa-music fa-5x" aria-hidden="true"></i>', 
-				'class="btn btn-outline-secondary redondo"');
-			?>
-		</div>
-	<?php } ?>
-	</div>
-<br/><br/>
-
-	<div class="row centrado"><hr><h1>Destacados</h1><hr>
 	<?php foreach($destacados as $producto){ ?>
 		<div class="col-md-4"><br>			
 			<div class="card card-block prod">

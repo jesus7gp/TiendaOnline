@@ -3,18 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ctrl_user extends CI_Controller {
 
+	public function __construct()
+		{
+			parent::__construct();
+			$this->load->model('model_categorias');
+			
+		}	
 	public function index()
 	{
-		$carrito = new Carrito();
-		$this->load->library('form_validation');
-		
+		$this->load->library('form_validation');	
 		$this->load->model('model_user');
 	
-		if (!$this->input->post()){		
-			$this->load->view('templates/layout', array(
-				'cuerpo'=>$this->load->view('user/v_login', null,TRUE),
-			'carrito'=>$carrito
-				));
+		if (!$this->input->post()){
+			$this->load->CargaVista('user/v_login', null);
 		}
 		else{
 			$usuario = $this->model_user->CompruebaUsuario($this->input->post());
@@ -27,28 +28,21 @@ class Ctrl_user extends CI_Controller {
 				redirect(base_url());
 			}
 			else{
-				$this->load->view('templates/layout', array(
-				'mensaje'=>$this->load->view('templates/mensaje', array('tipo'=>'danger','mensaje'=>'Usuario no registrado.'),TRUE),	
-				'cuerpo'=>$this->load->view('user/v_login', null,TRUE),
-			'carrito'=>$carrito
-				));
+				$this->load->CargaVista('user/v_login', null);
 			}			
 		}
 	}
 
 	public function EditarDatos(){
-		$carrito = new Carrito();
 		$this->load->model('model_provincias');
 		$this->load->model('model_user');
 		$this->load->library('form_validation');
 		$listaProvincias = $this->model_provincias->ListaProvincias();
 		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
-		$this->load->view('templates/layout', array(	
-				'cuerpo'=>$this->load->view('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias),TRUE),
-			'carrito'=>$carrito
-				));
+		$this->load->CargaVista('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias));
 	}
 
+	//Sin destruir la sesión, hace un unset de las variables de sesión asociadas al usuario
 	public function logout(){
 		$carrito = new Carrito();
 		$this->session->unset_userdata('nombre');
@@ -57,15 +51,14 @@ class Ctrl_user extends CI_Controller {
 	}
 
 	public function registro(){
-		$carrito = new Carrito();
 		$this->load->model('model_provincias');
 		$this->load->model('model_user');
 		$this->load->library('form_validation');
 
 		$listaProvincias = $this->model_provincias->ListaProvincias();
-		$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 
- ', '</div>');
+		//Reglas de validación del formulario
+		$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>', '</div>');
 		$this->form_validation->set_rules('usuario', 'usuario', 'required|is_unique[usuario.usuario]',array('is_unique'=>'El usuario ya existe.'));
 		$this->form_validation->set_rules('correo', 'email', 'required|valid_email');
 		$this->form_validation->set_rules('clave', 'contraseña', 'required');
@@ -79,10 +72,7 @@ class Ctrl_user extends CI_Controller {
 				
 		
 		if ($this->form_validation->run() == FALSE){
-            $this->load->view('templates/layout', array(
-			'cuerpo'=>$this->load->view('user/v_registro', array('ListaProvincias' => $listaProvincias),TRUE),
-			'carrito'=>$carrito
-			));
+			$this->load->CargaVista('user/v_registro', array('ListaProvincias' => $listaProvincias));
         }
         else {
             $this->model_user->InsertaUsuario($this->input->post());

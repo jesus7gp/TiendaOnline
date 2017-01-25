@@ -1,15 +1,8 @@
-
-<body>
+<div class="jumbotron titulo" style="text-align: center"><h1><i class="fa fa-music" aria-hidden="true"></i> <?php echo $categoria['nombre'] ?></h1><p><?php echo $categoria['descripcion'] ?></p></div>
 <div class="container">
-	<div class="jumbotron titulo">
-	
-	<h1><?php echo $categoria['nombre'] ?></h1>
-	<p><?php echo $categoria['descripcion'] ?></p>
-	
-	</div>
 	<div class="row centrado">
 	<?php foreach($ListaProductos as $producto){ ?>
-		<div class="col-md-4"><br><br>			
+		<div class="col-md-4"><br>			
 			<div class="card card-block prod">
 				<img class="img-fluid" src="<?php echo base_url('assets/img/'.$producto['imagen'].'.jpg') ?>">
 				<?php 
@@ -48,4 +41,3 @@
 			<?php echo $this->pagination->create_links(); ?>
 		</div>
 </div>
-</body>

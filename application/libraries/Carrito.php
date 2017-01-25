@@ -74,7 +74,7 @@ class Carrito
 	    $articulo["total"] = $articulo["cantidad"] * $articulo["precio"];
  
 	    //primero debemos eliminar el producto si es que estaba en el carrito
-	    $this->unset_producto($unique_id);
+	    //$this->unset_producto($unique_id);
  
 	    ///ahora añadimos el producto al carrito
 	    $_SESSION["carrito"][$unique_id] = $articulo;

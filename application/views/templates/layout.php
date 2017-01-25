@@ -21,6 +21,20 @@
 <nav class="navbar navbar-dark bg-inverse">
 <!-- Navbar content -->
 <a class="navbar-brand mb-0" href="<?php echo base_url() ?>"><i class="fa fa-music" aria-hidden="true"></i>	MusicOnline</a>
+<ul class="nav navbar-nav pull-xs-left">
+	<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
+	<div class="dropdown-menu" aria-labelledby="Preview">
+		<?php foreach($ListaCategorias as $categoria): ?>		
+			<?php echo anchor(
+				'ctrl_portada/categoria/'.$categoria["id"], 
+				$categoria["nombre"], 
+				'class="dropdown-item"');
+			?>
+	<?php endforeach; ?>
+	</div>
+	</li>
+</ul>
 <!--EL USUARIO SÍ HA INICIADO SESIÓN********************************************************************************************************************************************-->
 <ul class="nav navbar-nav pull-xs-right">
 	<?php if($this->session->has_userdata('id')): ?>

@@ -27,6 +27,7 @@ td{
 }
 .titulo{
 	background: rgba(41, 43, 44, 0.9);
+  padding: 30px;
 }
 hr{
   border-color: white;
