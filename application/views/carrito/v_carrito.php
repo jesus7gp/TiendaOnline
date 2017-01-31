@@ -51,6 +51,14 @@
     </div>
     <div class="btn-group">
     <a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Destroy')?>">Vaciar carrito</a>
-    <a class="btn btn-success" href="<?=base_url()?>">Finalizar pedido</a>
+    <?php if(!($this->session->has_userdata('id'))): ?>
+    <!--No se ha iniciado sesión-->
+    <a class="btn btn-success" href="<?=base_url('index.php/ctrl_user')?>">Debes iniciar sesión para realizar el pedido</a>
+    <?php elseif($carrito->articulos_total()==0): ?>
+    <!--Si no hay productos en el carrito no se mostrará el botón de finalizar pedido-->
+    <?php else: ?>
+    <!--Se puede finalizar el pedido-->
+    <a class="btn btn-success" href="<?=base_url('index.php/ctrl_carrito/FinalizaPedido')?>">Finalizar pedido</a>
+    <?php endif; ?>
     </div><br/><br/>
 </div>

@@ -8,7 +8,9 @@ class Ctrl_user extends CI_Controller {
 			parent::__construct();
 			$this->load->model('model_categorias');
 			
-		}	
+		}
+
+	//El index será el inicio de sesión		
 	public function index()
 	{
 		$this->load->library('form_validation');	
@@ -33,6 +35,7 @@ class Ctrl_user extends CI_Controller {
 		}
 	}
 
+	//Edita los datos del usuario que se encuentra en la sesión
 	public function EditarDatos(){
 		$this->load->model('model_provincias');
 		$this->load->model('model_user');
@@ -50,6 +53,8 @@ class Ctrl_user extends CI_Controller {
 		redirect(base_url());
 	}
 
+
+	//Registro que guarda un usuario nuevo en la base de datos
 	public function registro(){
 		$this->load->model('model_provincias');
 		$this->load->model('model_user');
@@ -87,6 +92,16 @@ class Ctrl_user extends CI_Controller {
 
         }
 
+	}
+
+	//Se ven los pedidos del usuario que se encuentra en la sesión
+	public function VerPedidos(){
+		$this->load->model('model_provincias');
+		$this->load->model('model_user');
+		$this->load->library('form_validation');
+		$listaProvincias = $this->model_provincias->ListaProvincias();
+		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
+		$this->load->CargaVista('user/v_mispedidos', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias));
 	}
 
 }
