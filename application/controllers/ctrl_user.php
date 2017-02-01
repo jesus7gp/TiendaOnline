@@ -128,6 +128,15 @@ class Ctrl_user extends CI_Controller {
 				));
 	}
 
+	public function CreaPDF(){
+		$this->load->library('lib_pdf');
+		$pdf = new FPDF();
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',16);
+		$pdf->Cell(40,10,utf8_decode('¡Hola, Mundo!'));
+		$pdf->Output();
+	}
+
 }
 
 /* End of file ctrl_user.php */

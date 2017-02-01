@@ -2,7 +2,7 @@
 	<h1><i class="fa fa-truck" aria-hidden="true"></i> Datos del pedido</h1><br/>
 	<div class="btn-group">
 	<a class="btn btn-secondary volver" title="Volver" href="<?=base_url('index.php/ctrl_user/VerPedidos')?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-	<a class="btn btn-secondary volver" title="Exportar PDF" href="<?=base_url()?>"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+	<a class="btn btn-secondary volver" target="_blank" title="Exportar PDF" href="<?=base_url('index.php/ctrl_user/creaPDF')?>"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 	</div>
 	<ul class="list-group">
 	<li class="list-group-item"><strong>Nombre:</strong> <?=$pedido['nombre']?></li>
