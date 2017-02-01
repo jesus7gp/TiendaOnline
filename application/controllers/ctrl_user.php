@@ -96,12 +96,36 @@ class Ctrl_user extends CI_Controller {
 
 	//Se ven los pedidos del usuario que se encuentra en la sesión
 	public function VerPedidos(){
+		$this->load->helper('util');
 		$this->load->model('model_provincias');
+		$this->load->model('model_pedidos');
 		$this->load->model('model_user');
-		$this->load->library('form_validation');
+
+		$pedidos = $this->model_pedidos->SacaPedidos($this->session->userdata('id'));
 		$listaProvincias = $this->model_provincias->ListaProvincias();
 		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
-		$this->load->CargaVista('user/v_mispedidos', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias));
+		$this->load->CargaVista('user/v_mispedidos', 
+			array('usuario' => $usuario,
+				'ListaProvincias' => $listaProvincias,
+				'pedidos' => $pedidos 
+				));
+	}
+
+	public function UnPedido($id_pedido){
+		$this->load->helper('util');
+		$this->load->model('model_provincias');
+		$this->load->model('model_pedidos');
+		$this->load->model('model_user');
+		$this->load->model('model_productos');
+		$pedido = $this->model_pedidos->Pedido($id_pedido);
+		$lineas = $this->model_pedidos->Lineas($id_pedido);
+		$listaProvincias = $this->model_provincias->ListaProvincias();
+		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
+		$this->load->CargaVista('user/v_pedido', 
+			array('usuario' => $usuario,
+				'lineas' => $lineas, 
+				'pedido' => $pedido 
+				));
 	}
 
 }

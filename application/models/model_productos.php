@@ -28,14 +28,26 @@ class Model_productos extends CI_Model {
 		$query = $this->db->get_where('producto', array('id'=>$id));
 		return $query->row_array();
 	}
-
-	public function TotalProductos($id){		
-		$this->db->select('producto.*');
+	public function NombreProducto($id){		
+		$this->db->select('nombre');
+		$this->db->from('producto');
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+		return $query->row()->nombre;
+	}
+	public function TotalProductos($categoria){		
+		$this->db->select('*');
 		$this->db->from('producto');	
-		$this->db->where('producto.oculto', 1);
-		$this->db->where('producto.categoria', $id);
+		$this->db->where('oculto', 1);
+		$this->db->where('categoria', $categoria);
 		return $this->db->count_all_results();
 	}
 	
+	public function BajaStock($id, $cantidad){
+		$producto = $this->db->get_where('producto', array('id' => $id));
+		$p = $producto->row_array();
+		$nueva = $p['stock'] - $cantidad;
+		$this->db->update('producto', array('stock' => $nueva), $id);
+	}
 
 }

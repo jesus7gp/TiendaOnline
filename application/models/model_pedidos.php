@@ -12,7 +12,29 @@ class Model_pedidos extends CI_Model {
 		$this->db->insert('linea_pedido',$datos);
 	}
 
+	public function SacaPedidos($id_usuario){
+		$query = $this->db->get_where('pedido', array('id_usuario'=>$id_usuario));
+		return $query->result_array();
+	}
+/*
+	public function Pedido($id){
+		$this->db->select('*');
+		$this->db->from('pedido');	
+		$this->db->join('linea_pedido', 'pedido.id = linea_pedido.id_pedido');
+		$this->db->where('pedido.id', $id);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+*/
+	public function Pedido($id){
+		$query = $this->db->get_where('pedido', array('id'=>$id));
+		return $query->row_array();
+	}
 
+	public function Lineas($id_pedido){
+		$query = $this->db->get_where('linea_pedido', array('id_pedido'=>$id_pedido));
+		return $query->result_array();
+	}
 }
 
 /* End of file model_pedidos.php */

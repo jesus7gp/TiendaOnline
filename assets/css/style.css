@@ -22,6 +22,9 @@ body{
 .dropdown-menu { 
   left: -10%;
 }
+.list-group-item{
+  background: transparent;
+}
 td{
   text-align: left;
 }

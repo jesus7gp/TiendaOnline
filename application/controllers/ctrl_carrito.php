@@ -65,7 +65,7 @@ class Ctrl_carrito extends CI_Controller {
 		else{//Se puede finalizar el pedido
 			$this->load->model('model_user');
 			$this->load->model('model_pedidos');
-
+			$this->load->model('model_productos');
 			//Obtiene los datos del usuario para introducirlos en el pedido
 			$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
 
@@ -94,6 +94,7 @@ class Ctrl_carrito extends CI_Controller {
 					'cantidad' => $producto['cantidad']  
 					);
 				$this->model_pedidos->InsertaLinea($datos_linea);
+				$this->model_productos->BajaStock($producto['id'], $producto['cantidad']);
 			}
 			//Una vez ha terminado el pedido, se vacía el carrito
 			$carrito->destroy();
