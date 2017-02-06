@@ -21,7 +21,7 @@ class Ctrl_user extends CI_Controller {
 		}
 		else{
 			$usuario = $this->model_user->CompruebaUsuario($this->input->post());
-			if($usuario){
+			if($usuario & $usuario['activo'] == 1){
 				$newdata = array(
         			'nombre'     => $usuario['nombre'],
         			'id' => $usuario['id']
@@ -42,7 +42,61 @@ class Ctrl_user extends CI_Controller {
 		$this->load->library('form_validation');
 		$listaProvincias = $this->model_provincias->ListaProvincias();
 		$usuario = $this->model_user->UsuarioID($this->session->userdata('id'));
-		$this->load->CargaVista('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias));
+		
+		//Reglas de validación del formulario
+		$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>', '</div>');
+		
+		$this->form_validation->set_rules('nombre', 'nombre', 'required');
+		$this->form_validation->set_rules('apellidos', 'apellidos', 'required');
+		$this->form_validation->set_rules('dni', 'DNI', 'required');
+		$this->form_validation->set_rules('provincia', 'provincia', 'required|greater_than[0]',array('greater_than'=>'El campo provincia es obligatorio.'));
+		$this->form_validation->set_rules('cp', 'código postal', 'required');
+		$this->form_validation->set_rules('direccion', 'dirección', 'required');
+				
+		
+		if ($this->form_validation->run() == FALSE){
+			$this->load->CargaVista('user/v_micuenta', array('usuario' => $usuario,'ListaProvincias' => $listaProvincias));
+        }
+        else {
+            $this->model_user->CambiaDatos($this->session->userdata('id'), $this->input->post());
+
+            
+			redirect(base_url());
+
+        }
+	}
+
+	public function NuevaClave(){
+
+		$this->load->model('model_user');
+		$this->load->library('form_validation');
+
+		//Reglas de validación del formulario
+		$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>', '</div>');
+		$this->form_validation->set_rules('clave', 'contraseña', 'required');
+		$this->form_validation->set_rules('repclave', 'confirmar contraseña', 'required|matches[clave]');
+						
+		if ($this->form_validation->run() == FALSE){
+			$this->load->CargaVista('user/v_pass', null);
+        }
+        else {
+            $this->model_user->CambiaPass($this->session->userdata('id'), $this->input->post());
+			redirect(base_url());
+
+        }
+	}
+
+	//Se da de baja al usuario, simplemente cambiando el campo correspondiente de la base de datos
+	//No elimina nada de la base de datos
+	public function Baja(){
+		$carrito = new Carrito();
+		$this->load->model('model_user');
+		$this->model_user->DarBaja($this->session->userdata('id'));
+
+		//Hace el logout
+		$this->session->unset_userdata('nombre');
+		$this->session->unset_userdata('id');
+		redirect(base_url());
 	}
 
 	//Sin destruir la sesión, hace un unset de las variables de sesión asociadas al usuario
@@ -128,12 +182,50 @@ class Ctrl_user extends CI_Controller {
 				));
 	}
 
-	public function CreaPDF(){
+	public function CreaPDF($id_pedido){
+		$this->load->model('model_pedidos');
+		$this->load->model('model_productos');
+		$pedido = $this->model_pedidos->Pedido($id_pedido);
+		$lineas = $this->model_pedidos->Lineas($id_pedido);
+
 		$this->load->library('lib_pdf');
 		$pdf = new FPDF();
+		$pdf->AliasNbPages();
 		$pdf->AddPage();
-		$pdf->SetFont('Arial','B',16);
-		$pdf->Cell(40,10,utf8_decode('¡Hola, Mundo!'));
+		$pdf->SetFont('Times','',12);
+		
+		//DATOS DEL PEDIDO
+		$fecha = date("d-m-Y",strtotime($pedido["fecha"]));
+		$hora = date("H:m",strtotime($pedido["fecha"]));
+		$pdf->Cell(40,6,utf8_decode('·Nombre: '.$pedido['nombre']));
+		$pdf->Ln();
+		$pdf->Cell(40,6,utf8_decode('·Apellidos: '.$pedido['apellidos']));
+		$pdf->Ln();
+		$pdf->Cell(40,6,utf8_decode('·Dirección: '.$pedido['direccion']));
+		$pdf->Ln();
+		$pdf->Cell(40,6,utf8_decode('·Código postal: '.$pedido['cp']));
+		$pdf->Ln();
+		$pdf->Cell(40,6,utf8_decode('·Fecha: '.$fecha));
+		$pdf->Ln();
+		$pdf->Cell(40,6,utf8_decode('·Hora: '.$hora));
+		$pdf->Ln();
+
+		//TABLA DE LINEAS DE PEDIDO
+		$w = array(60, 20, 30, 30);
+
+		$header = array('Producto','Cantidad','Precio','Subtotal');
+
+		for($i=0;$i<count($header);$i++)
+        $pdf->Cell($w[$i],7,$header[$i],1,0,'C');
+    	$pdf->Ln();
+		foreach($lineas as $linea){
+			$pdf->Cell($w[0],6,utf8_decode($this->model_productos->NombreProducto($linea['id_producto'])),'LR');
+			$pdf->Cell($w[1],6,utf8_decode($linea['cantidad']),'LR',0,'C');
+			$pdf->Cell($w[2],6,utf8_decode($linea['precio'].' euros'),'LR',0,'R');
+			$pdf->Cell($w[3],6,utf8_decode(($linea['precio']*$linea['cantidad']).' euros'),'LR',0,'R');
+			$pdf->Ln();
+		}		
+		$pdf->Cell(array_sum($w),0,'','T');
 		$pdf->Output();
 	}
 

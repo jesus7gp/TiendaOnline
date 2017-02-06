@@ -6,34 +6,6 @@
 
 <FORM ACTION="" METHOD="POST">
 <div class="row">
-<div class="col-md-6">
-	<fieldset class="form-group">
-		<label for="">Nombre de usuario:</label>
-		<input type="text" name="usuario" class="form-control" value="<?=set_value('usuario',$usuario['usuario'])?>">
-		<?=form_error('usuario')?>
-	</fieldset></div>
-	<div class="col-md-6">
-	<fieldset class="form-group">
-		<label for="">Email:</label>
-		<input type="text" name="correo" class="form-control" value="<?=set_value('correo',$usuario['correo'])?>">
-		<?=form_error('correo')?>
-	</fieldset></div>
-</div>
-<div class="row">
-<div class="col-md-6">
-	<fieldset class="form-group">
-		<label for="">Contraseña:</label>
-		<input type="password" name="clave" class="form-control" value="<?=set_value('clave')?>">
-		<?=form_error('clave')?>
-	</fieldset></div>
-<div class="col-md-6">	
-	<fieldset class="form-group">
-		<label for="">Confirmar contraseña:</label>
-		<input type="password" name="repclave" class="form-control" value="<?=set_value('repclave')?>">
-		<?=form_error('repclave')?>
-	</fieldset></div>
-</div>
-<div class="row">
 <div class="col-md-4">
 	<fieldset class="form-group">
 		<label for="">Nombre:</label>
@@ -71,7 +43,11 @@
 		<input type="text" name="direccion" class="form-control" value="<?=set_value('direccion', $usuario['direccion'])?>">
 		<?=form_error('direccion')?>
 	</fieldset>
-	<button class="btn btn-primary sesion" type="submit">Guardar cambios</button>
+	<div class="btn-group">
+	<button class="btn btn-primary" type="submit">Guardar cambios</button>
+	<a href="<?=base_url('index.php/ctrl_user/NuevaClave')?>" class="btn btn-success" type="submit">Cambiar contraseña</a>
+	<a href="<?=base_url('index.php/ctrl_user/Baja')?>" class="btn btn-danger" type="submit">Cancelar cuenta</a>
+	</div>
 </FORM>
 <br><br>
 <div class="alert alert-info" role="alert"><i class="fa fa-exclamation-circle" aria-hidden="true"></i><b>	IMPORTANTE: </b>Todos los campos son obligatorios.</div>

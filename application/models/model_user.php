@@ -9,13 +9,13 @@ class Model_user extends CI_Model {
 
 	public function InsertaUsuario($datos){
 		unset($datos['repclave']);
-		$datos['clave']=md5($datos['clave']);
+		$datos['clave']=sha1($datos['clave']);
 		$datos['activo'] = 1;
 		$this->db->insert('usuario',$datos);
 	}
 
 	public function CompruebaUsuario($datos){
-		$query = $this->db->get_where('usuario', array('usuario'=>$datos['usuario'], 'clave'=>md5($datos['clave'])));
+		$query = $this->db->get_where('usuario', array('usuario'=>$datos['usuario'], 'clave'=>sha1($datos['clave'])));
 		return $query->row_array();	
 	}
 
@@ -25,7 +25,17 @@ class Model_user extends CI_Model {
 	}
 
 	public function CambiaDatos($id, $datos){
-		$this->db->update('usuario', $datos, $id);
+		$this->db->update('usuario', $datos, array('id'=>$id));
+	}
+
+	public function CambiaPass($id,$datos){
+		unset($datos['repclave']);
+		$datos['clave']=sha1($datos['clave']);
+		$this->db->update('usuario', $datos, array('id'=>$id));
+	}
+
+	public function DarBaja($id){
+		$this->db->update('usuario', array('activo' => 0), array('id'=>$id));
 	}
 
 }
