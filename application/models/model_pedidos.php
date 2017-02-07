@@ -26,6 +26,10 @@ class Model_pedidos extends CI_Model {
 		$query = $this->db->get_where('linea_pedido', array('id_pedido'=>$id_pedido));
 		return $query->result_array();
 	}
+
+	public function Cancelar($id){
+		$this->db->update('pedido', array('estado' => 'c'), array('id'=>$id));
+	}
 }
 
 /* End of file model_pedidos.php */

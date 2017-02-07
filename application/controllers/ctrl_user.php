@@ -66,6 +66,17 @@ class Ctrl_user extends CI_Controller {
         }
 	}
 
+	public function CancelarPedido($id){
+		$this->load->model('model_pedidos');
+		$this->load->model('model_productos');
+		$this->model_pedidos->Cancelar($id);
+		$lineas = $this->model_pedidos->Lineas($id);
+		foreach($lineas as $linea){
+			$this->model_productos->SubeStock($linea['id_producto'], $linea['cantidad']);
+		}
+		redirect(base_url('index.php/ctrl_user/VerPedidos'));
+	}
+
 	public function NuevaClave(){
 
 		$this->load->model('model_user');

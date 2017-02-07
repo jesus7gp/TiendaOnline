@@ -50,6 +50,13 @@ class Model_productos extends CI_Model {
 		$this->db->update('producto', array('stock' => $nueva), array('id' => $id));
 	}
 
+	public function SubeStock($id, $cantidad){
+		$producto = $this->db->get_where('producto', array('id' => $id));
+		$p = $producto->row_array();
+		$nueva = $p['stock'] + $cantidad;
+		$this->db->update('producto', array('stock' => $nueva), array('id' => $id));
+	}
+
 	public function Stock($id){
 		$query = $this->db->get_where('producto', array('id'=>$id));
 		return $query->row()->stock;
