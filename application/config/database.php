@@ -75,9 +75,13 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	//iessansebastian.com
 	'hostname' => 'localhost',
+	//2daw16_jesusgo
 	'username' => 'root',
+	//jeszpac%16
 	'password' => '',
+	//2daw16_jesusgo02
 	'database' => 'tiendaonline',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

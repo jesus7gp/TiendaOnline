@@ -108,19 +108,59 @@ class Ctrl_user extends CI_Controller {
 	}
 
 	public function correo(){
-		$this->load->library('email');
+		$this->load->library('form_validation');
+		$this->load->model('model_user');
+		$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>', '</div>');
+		$this->form_validation->set_rules('usuario', 'usuario', 'required');
+		$this->form_validation->set_rules('correo', 'email', 'required|valid_email');
+						
+		if ($this->form_validation->run() == FALSE){
+			$this->load->CargaVista('user/v_recuperapass', null);
+        }
+        else {
+        	$user = $this->model_user->CompruebaCorreo($this->input->post());
+        	if($user){
+        		$enlace = base_url().'/index.php/ctrl_user/recover/'.$user['id'].'/'.sha1(date('Y-m-d'));
+
+        		$this->load->library('email');
+				$this->email->set_mailtype("html");
+				$this->email->from('aula4@iessansebastian.com', 'MusicOnline');
+				$this->email->to($this->input->post()->correo);
 		
-		$this->email->from('aula4@iessansebastian.com', 'MusicOnline');
-		$this->email->to('jgonzalezpacheco1112@gmail.com');
-		//$this->email->cc('another@example.com');
-		//$this->email->bcc('and@another.com');
+				$this->email->subject('Cambio de contraseña');
+				$this->email->message('Por favor, cambie su contraseña <a href="'.$enlace.'">aquí</a>');
 		
-		$this->email->subject('Cambio de contraseña');
-		$this->email->message('Por favor, cambie su contraseña a través del siguiente enlace: ');
+				$this->email->send();
 		
-		$this->email->send();
+				echo $this->email->print_debugger();
+        	}
+            
+			redirect(base_url());
+
+        }
 		
-		echo $this->email->print_debugger();
+	}
+
+	public function recover($id, $fecha){
+		$this->load->library('form_validation');
+		$this->load->model('model_user');
+
+		$hoy = sha1(date('Y-m-d'));
+		if($fecha = $hoy){
+			$this->form_validation->set_error_delimiters('<div style="color:tomato"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>', '</div>');
+			$this->form_validation->set_rules('clave', 'contraseña', 'required');
+			$this->form_validation->set_rules('repclave', 'confirmar contraseña', 'required|matches[clave]');
+							
+			if ($this->form_validation->run() == FALSE){
+				$this->load->CargaVista('user/v_pass', null);
+	        }
+	        else {
+	            $this->model_user->CambiaPass($id, $this->input->post());
+				redirect(base_url());
+
+	        }
+		}
+
 	}
 
 	//Registro que guarda un usuario nuevo en la base de datos

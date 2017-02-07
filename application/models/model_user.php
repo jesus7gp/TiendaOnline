@@ -19,6 +19,11 @@ class Model_user extends CI_Model {
 		return $query->row_array();	
 	}
 
+	public function CompruebaCorreo($datos){
+		$query = $this->db->get_where('usuario', array('usuario'=>$datos['usuario'], 'correo'=>$datos['correo']));
+		return $query->row_array();	
+	}
+
 	public function UsuarioID($id){
 		$query = $this->db->get_where('usuario', array('id'=>$id));
 		return $query->row_array();
