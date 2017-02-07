@@ -107,6 +107,21 @@ class Ctrl_user extends CI_Controller {
 		redirect(base_url());
 	}
 
+	public function correo(){
+		$this->load->library('email');
+		
+		$this->email->from('aula4@iessansebastian.com', 'MusicOnline');
+		$this->email->to('jgonzalezpacheco1112@gmail.com');
+		//$this->email->cc('another@example.com');
+		//$this->email->bcc('and@another.com');
+		
+		$this->email->subject('Cambio de contraseña');
+		$this->email->message('Por favor, cambie su contraseña a través del siguiente enlace: ');
+		
+		$this->email->send();
+		
+		echo $this->email->print_debugger();
+	}
 
 	//Registro que guarda un usuario nuevo en la base de datos
 	public function registro(){

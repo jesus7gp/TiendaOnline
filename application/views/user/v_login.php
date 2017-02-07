@@ -13,7 +13,7 @@
 			<input type="password" name="clave" placeholder="Introduzca clave de acceso" class="form-control" value=""><br>
 		</fieldset>
 		<button class="btn btn-primary sesion" type="submit">Iniciar sesión</button><br><br>
-		<a class="h6" href="">¿Ha olvidado la contraseña?</a>
+		<a class="h6" href="<?=base_url('index.php/ctrl_user/correo')?>">¿Ha olvidado la contraseña?</a>
 		</div>
 		<div class="col-md-4"></div>
 	</div>
