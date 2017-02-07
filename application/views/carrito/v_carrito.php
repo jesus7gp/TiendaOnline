@@ -1,5 +1,8 @@
 <?php $carro = $carrito->get_content(); ?>
 <div class="container titulo">
+<?php if(isset($mensaje)): ?>
+    <p><?=$mensaje?></p>
+<?php endif; ?>
     <br/><h1><i class="fa fa-shopping-cart" aria-hidden="true"></i> Carrito de la compra</h1><br/><br/><br/>
     <div class="row centrado">
         <table class="table table-hover">

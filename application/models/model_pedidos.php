@@ -16,16 +16,7 @@ class Model_pedidos extends CI_Model {
 		$query = $this->db->get_where('pedido', array('id_usuario'=>$id_usuario));
 		return $query->result_array();
 	}
-/*
-	public function Pedido($id){
-		$this->db->select('*');
-		$this->db->from('pedido');	
-		$this->db->join('linea_pedido', 'pedido.id = linea_pedido.id_pedido');
-		$this->db->where('pedido.id', $id);
-		$query = $this->db->get();
-		return $query->result_array();
-	}
-*/
+
 	public function Pedido($id){
 		$query = $this->db->get_where('pedido', array('id'=>$id));
 		return $query->row_array();
