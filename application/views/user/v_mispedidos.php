@@ -14,7 +14,7 @@
 			<tr>
 				<td>
 				
-				<a class="btn btn-info cantip" href="<?=base_url('index.php/ctrl_user/UnPedido/'.$pedido['id'])?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
+				<a class="btn btn-info cantip" href="<?=base_url('index.php/Ctrl_user/UnPedido/'.$pedido['id'])?>"><i class="fa fa-eye" aria-hidden="true"></i></a>
 				</td>
 				<td><?=$pedido['nombre']?></td>
 				<td><?=$pedido['apellidos']?></td>

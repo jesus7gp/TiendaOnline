@@ -1,7 +1,7 @@
 <body><br>
 <div class="container">
 <?php echo anchor(
-				'ctrl_portada/categoria/'.$producto["categoria"], 
+				'Ctrl_portada/categoria/'.$producto["categoria"], 
 				'<i class="fa fa-arrow-left" aria-hidden="true"></i><strong> Categoría</strong>', 
 				'class="btn btn-secondary volver"');
 			?>
@@ -16,7 +16,7 @@
 						<div class="alert alert-success" role="alert"><strong>En stock</strong></div>
 						<h3><?=$producto['precioventa'] ?> €</h3>
 						
-						<a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'])?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
+						<a class="btn btn-primary" href="<?=base_url('index.php/Ctrl_carrito/Add/'.$producto['id'])?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 					else{

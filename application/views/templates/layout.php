@@ -27,7 +27,7 @@
 	<div class="dropdown-menu" aria-labelledby="Preview">
 		<?php foreach($ListaCategorias as $categoria): ?>		
 			<?php echo anchor(
-				'ctrl_portada/categoria/'.$categoria["id"], 
+				'Ctrl_portada/categoria/'.$categoria["id"], 
 				$categoria["nombre"], 
 				'class="dropdown-item"');
 			?>
@@ -43,19 +43,19 @@
 ¡Hola, <strong><?php echo $this->session->userdata('nombre');?></strong>!
 </a>
 	<div class="dropdown-menu" aria-labelledby="Preview">
-	<a class="dropdown-item" href="<?php echo base_url('index.php/ctrl_user/EditarDatos') ?>"><i class="fa fa-user-circle" aria-hidden="true"></i> Mi cuenta</a>
-	<a class="dropdown-item" href="<?php echo base_url('index.php/ctrl_user/VerPedidos') ?>"><i class="fa fa-truck" aria-hidden="true"></i> Mis pedidos</a>
+	<a class="dropdown-item" href="<?php echo base_url('index.php/Ctrl_user/EditarDatos') ?>"><i class="fa fa-user-circle" aria-hidden="true"></i> Mi cuenta</a>
+	<a class="dropdown-item" href="<?php echo base_url('index.php/Ctrl_user/VerPedidos') ?>"><i class="fa fa-truck" aria-hidden="true"></i> Mis pedidos</a>
 	<a class="dropdown-item" data-toggle="modal" data-target="#flipFlop" href=""><i class="fa fa-sign-out" aria-hidden="true"></i> Cerrar sesión</a>
 	</div>
 	</li>
 <!--EL USUARIO NO HA INICIADO SESIÓN********************************************************************************************************************************************-->	
 	<?php else: ?>
 	<li class="nav-item">
-		<a class="nav-link" href="<?php echo base_url('index.php/ctrl_user') ?>">Iniciar sesión</a>
+		<a class="nav-link" href="<?php echo base_url('index.php/Ctrl_user') ?>">Iniciar sesión</a>
 	</li>
 	<?php endif; ?>
 	<li class="nav-item">
-		<a class="nav-link" href="<?=base_url('index.php/ctrl_carrito')?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <?=$carrito->articulos_total()?> ítem(s)</a>
+		<a class="nav-link" href="<?=base_url('index.php/Ctrl_carrito')?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <?=$carrito->articulos_total()?> ítem(s)</a>
 	</li>
 </ul>
 <!--MODAL DE CONFIRMACIÓN CERRAR SESIÓN********************************************************************************************************************************************-->
@@ -72,7 +72,7 @@
 				¿Está seguro?
 			</div>
 			<div class="modal-footer">
-				<a href="<?php echo base_url('index.php/ctrl_user/logout') ?>" class="btn btn-secondary respLogout">Sí</a>
+				<a href="<?php echo base_url('index.php/Ctrl_user/logout') ?>" class="btn btn-secondary respLogout">Sí</a>
 				<button type="button" class="btn btn-secondary respLogout" data-dismiss="modal" aria-label="Close">No</button>
 			</div>
 		</div>

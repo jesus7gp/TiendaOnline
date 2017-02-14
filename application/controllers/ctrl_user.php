@@ -66,6 +66,7 @@ class Ctrl_user extends CI_Controller {
         }
 	}
 
+	//Cambia el estado de un pedido a cancelado
 	public function CancelarPedido($id){
 		$this->load->model('model_pedidos');
 		$this->load->model('model_productos');
@@ -74,7 +75,7 @@ class Ctrl_user extends CI_Controller {
 		foreach($lineas as $linea){
 			$this->model_productos->SubeStock($linea['id_producto'], $linea['cantidad']);
 		}
-		redirect(base_url('index.php/ctrl_user/VerPedidos'));
+		redirect(base_url('index.php/Ctrl_user/VerPedidos'));
 	}
 
 	public function NuevaClave(){
@@ -118,6 +119,7 @@ class Ctrl_user extends CI_Controller {
 		redirect(base_url());
 	}
 
+	//Correo para recuperar la contraseña
 	public function correo(){
 		$this->load->library('form_validation');
 		$this->load->model('model_user');
@@ -131,12 +133,13 @@ class Ctrl_user extends CI_Controller {
         else {
         	$user = $this->model_user->CompruebaCorreo($this->input->post());
         	if($user){
-        		$enlace = base_url().'/index.php/ctrl_user/recover/'.$user['id'].'/'.sha1(date('Y-m-d'));
+        		
+        		$enlace = base_url().'/index.php/Ctrl_user/recover/'.$user['id'].'/'.sha1(date('Y-m-d'));
 
         		$this->load->library('email');
-				$this->email->set_mailtype("html");
+				
 				$this->email->from('aula4@iessansebastian.com', 'MusicOnline');
-				$this->email->to($this->input->post()->correo);
+				$this->email->to($_POST['correo']);
 		
 				$this->email->subject('Cambio de contraseña');
 				$this->email->message('Por favor, cambie su contraseña <a href="'.$enlace.'">aquí</a>');
@@ -152,6 +155,7 @@ class Ctrl_user extends CI_Controller {
 		
 	}
 
+	//Pantalla para cambiar el correo, solo se podrá acceder desde el link enviado por correo al usuario
 	public function recover($id, $fecha){
 		$this->load->library('form_validation');
 		$this->load->model('model_user');
@@ -231,6 +235,7 @@ class Ctrl_user extends CI_Controller {
 				));
 	}
 
+	//Muestra los detalles de un pedido concreto
 	public function UnPedido($id_pedido){
 		$this->load->helper('util');
 		$this->load->model('model_provincias');
@@ -251,51 +256,27 @@ class Ctrl_user extends CI_Controller {
 	public function CreaPDF($id_pedido){
 		$this->load->model('model_pedidos');
 		$this->load->model('model_productos');
+		$this->load->library('lib_pdf');
 		$pedido = $this->model_pedidos->Pedido($id_pedido);
 		$lineas = $this->model_pedidos->Lineas($id_pedido);
 
-		$this->load->library('lib_pdf');
-		$pdf = new FPDF();
-		$pdf->AliasNbPages();
-		$pdf->AddPage();
-		$pdf->SetFont('Times','',12);
-		
-		//DATOS DEL PEDIDO
-		$fecha = date("d-m-Y",strtotime($pedido["fecha"]));
-		$hora = date("H:m",strtotime($pedido["fecha"]));
-		$pdf->Cell(40,6,utf8_decode('·Nombre: '.$pedido['nombre']));
-		$pdf->Ln();
-		$pdf->Cell(40,6,utf8_decode('·Apellidos: '.$pedido['apellidos']));
-		$pdf->Ln();
-		$pdf->Cell(40,6,utf8_decode('·Dirección: '.$pedido['direccion']));
-		$pdf->Ln();
-		$pdf->Cell(40,6,utf8_decode('·Código postal: '.$pedido['cp']));
-		$pdf->Ln();
-		$pdf->Cell(40,6,utf8_decode('·Fecha: '.$fecha));
-		$pdf->Ln();
-		$pdf->Cell(40,6,utf8_decode('·Hora: '.$hora));
-		$pdf->Ln();
+		//Se crea un array con los datos necesarios de la linea
+		$lineasNombre = array();
+		foreach ($lineas as $linea) {
+			$line = array(
+				'nombreproducto' => $this->model_productos->NombreProducto($linea['id_producto']), 
+				'cantidad' => $linea['cantidad'],
+				'precio' => $linea['precio']
+				);
+					
+			array_push($lineasNombre, $line);
+		}
 
-		//TABLA DE LINEAS DE PEDIDO
-		$w = array(60, 20, 30, 30);
-
-		$header = array('Producto','Cantidad','Precio','Subtotal');
-
-		for($i=0;$i<count($header);$i++)
-        $pdf->Cell($w[$i],7,$header[$i],1,0,'C');
-    	$pdf->Ln();
-		foreach($lineas as $linea){
-			$pdf->Cell($w[0],6,utf8_decode($this->model_productos->NombreProducto($linea['id_producto'])),'LR');
-			$pdf->Cell($w[1],6,utf8_decode($linea['cantidad']),'LR',0,'C');
-			$pdf->Cell($w[2],6,utf8_decode($linea['precio'].' euros'),'LR',0,'R');
-			$pdf->Cell($w[3],6,utf8_decode(($linea['precio']*$linea['cantidad']).' euros'),'LR',0,'R');
-			$pdf->Ln();
-		}		
-		$pdf->Cell(array_sum($w),0,'','T');
-		$pdf->Output();
+		//Crea el pdf
+		$pdf=$this->lib_pdf->PDF($id_pedido,$pedido,$lineasNombre,false);
 	}
 
 }
 
-/* End of file ctrl_user.php */
-/* Location: ./application/controllers/ctrl_user.php */
+/* End of file Ctrl_user.php */
+/* Location: ./application/controllers/Ctrl_user.php */

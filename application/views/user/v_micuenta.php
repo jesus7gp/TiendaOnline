@@ -45,8 +45,8 @@
 	</fieldset>
 	<div class="btn-group">
 	<button class="btn btn-primary" type="submit">Guardar cambios</button>
-	<a href="<?=base_url('index.php/ctrl_user/NuevaClave')?>" class="btn btn-success" type="submit">Cambiar contraseña</a>
-	<a href="<?=base_url('index.php/ctrl_user/Baja')?>" class="btn btn-danger" type="submit">Cancelar cuenta</a>
+	<a href="<?=base_url('index.php/Ctrl_user/NuevaClave')?>" class="btn btn-success" type="submit">Cambiar contraseña</a>
+	<a href="<?=base_url('index.php/Ctrl_user/Baja')?>" class="btn btn-danger" type="submit">Cancelar cuenta</a>
 	</div>
 </FORM>
 <br><br>

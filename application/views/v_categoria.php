@@ -17,13 +17,13 @@
 						<?php
 					}
 				?>
-				<a class="h4" href="<?php echo base_url('index.php/ctrl_portada/producto/'.$producto['id']) ?>"><?php echo $producto['nombre'] ?></a>
+				<a class="h4" href="<?php echo base_url('index.php/Ctrl_portada/producto/'.$producto['id']) ?>"><?php echo $producto['nombre'] ?></a>
 				<h4><?php echo $producto['precioventa'] ?>	€</h4>
 				
 				<?php 
 					if($producto['stock']>0){
 						?>
-							<a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'])?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
+							<a class="btn btn-primary" href="<?=base_url('index.php/Ctrl_carrito/Add/'.$producto['id'])?>"><i class="fa fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</a>
 						<?php
 					}
 					else{

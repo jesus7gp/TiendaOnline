@@ -7,3 +7,4 @@ function EstadoPedido($estado){
 			return "Cancelado";
 		}
 	}
+

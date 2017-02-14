@@ -33,7 +33,7 @@ class Ctrl_portada extends CI_Controller {
 	public function conf_pag(){
 		$this->load->library('pagination');
 		
-		$config['base_url'] = base_url('index.php/ctrl_portada/categoria/'.$this->uri->segment(3).'/');
+		$config['base_url'] = base_url('index.php/Ctrl_portada/categoria/'.$this->uri->segment(3).'/');
 		$config['total_rows'] = $this->model_productos->TotalProductos($this->uri->segment(3));
 		$config['per_page'] = 3;
 		$config['uri_segment'] = 4;
@@ -63,7 +63,7 @@ class Ctrl_portada extends CI_Controller {
 	public function conf_pagDes(){
 		$this->load->library('pagination');
 		
-		$config['base_url'] = base_url('index.php/ctrl_portada/index/');
+		$config['base_url'] = base_url('index.php/Ctrl_portada/index/');
 		$config['total_rows'] = $this->model_productos->TotalDestacados();
 		$config['per_page'] = 3;
 		$config['uri_segment'] = 3;
@@ -92,5 +92,5 @@ class Ctrl_portada extends CI_Controller {
 		
 }
 
-/* End of file ctrl_portada.php */
-/* Location: ./application/controllers/ctrl_portada.php */
+/* End of file Ctrl_portada.php */
+/* Location: ./application/controllers/Ctrl_portada.php */

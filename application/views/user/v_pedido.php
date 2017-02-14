@@ -1,11 +1,11 @@
 <div class="container"><br/><br/>
 	<h1><i class="fa fa-truck" aria-hidden="true"></i> Datos del pedido</h1><br/>
 	<div class="btn-group">
-	<a class="btn btn-secondary volver" title="Volver" href="<?=base_url('index.php/ctrl_user/VerPedidos')?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-	<a class="btn btn-secondary volver" target="_blank" title="Exportar PDF" href="<?=base_url('index.php/ctrl_user/creaPDF/'.$pedido['id'])?>"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+	<a class="btn btn-secondary volver" title="Volver" href="<?=base_url('index.php/Ctrl_user/VerPedidos')?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+	<a class="btn btn-secondary volver" target="_blank" title="Exportar PDF" href="<?=base_url('index.php/Ctrl_user/creaPDF/'.$pedido['id'])?>"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 	<!--Cancelar pedido-->
 				<?php if($pedido['estado'] == "p"): ?>
-					<a title="Cancelar pedido" href="<?=base_url('index.php/ctrl_user/CancelarPedido/'.$pedido['id'])?>" class="btn btn-danger volver"><i class="fa fa-remove" aria-hidden="true"></i></a>
+					<a title="Cancelar pedido" href="<?=base_url('index.php/Ctrl_user/CancelarPedido/'.$pedido['id'])?>" class="btn btn-danger volver"><i class="fa fa-remove" aria-hidden="true"></i></a>
 				<?php endif; ?>
 	</div>
 	<ul class="list-group">

@@ -30,15 +30,15 @@
             <?php if($carro):?>
             <?php foreach($carro as $producto):?>
                 <tr>
-                    <td><a href="<?=base_url('index.php/ctrl_carrito/Remove_producto/'.$producto['unique_id'])?>" class="btn btn-danger cantip"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
-                    <td><a class="h6" href="<?=base_url('index.php/ctrl_portada/producto/'.$producto['id']) ?>"><?=$producto["nombre"]?></a></td>
+                    <td><a href="<?=base_url('index.php/Ctrl_carrito/Remove_producto/'.$producto['unique_id'])?>" class="btn btn-danger cantip"><i class="fa fa-remove" aria-hidden="true"></i></a></td>
+                    <td><a class="h6" href="<?=base_url('index.php/Ctrl_portada/producto/'.$producto['id']) ?>"><?=$producto["nombre"]?></a></td>
                     <td>
                         <?=$producto["cantidad"]?>
                         <div class="btn-group">
                         <?php if($producto['cantidad']>1): ?>
-                        <a href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'].'/'.-1)?>" class="btn btn-danger cantip"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                        <a href="<?=base_url('index.php/Ctrl_carrito/Add/'.$producto['id'].'/'.-1)?>" class="btn btn-danger cantip"><i class="fa fa-minus" aria-hidden="true"></i></a>
                     <?php endif; ?>
-                        <a href="<?=base_url('index.php/ctrl_carrito/Add/'.$producto['id'])?>" class="btn btn-success cantip"><i class="fa fa-plus" aria-hidden="true"></i>
+                        <a href="<?=base_url('index.php/Ctrl_carrito/Add/'.$producto['id'])?>" class="btn btn-success cantip"><i class="fa fa-plus" aria-hidden="true"></i>
 </a>
                         </div>
                     </td>
@@ -53,15 +53,15 @@
         </table>
     </div>
     <div class="btn-group">
-    <a class="btn btn-primary" href="<?=base_url('index.php/ctrl_carrito/Destroy')?>">Vaciar carrito</a>
+    <a class="btn btn-primary" href="<?=base_url('index.php/Ctrl_carrito/Destroy')?>">Vaciar carrito</a>
     <?php if(!($this->session->has_userdata('id'))): ?>
     <!--No se ha iniciado sesión-->
-    <a class="btn btn-success" href="<?=base_url('index.php/ctrl_user')?>">Debes iniciar sesión para realizar el pedido</a>
+    <a class="btn btn-success" href="<?=base_url('index.php/Ctrl_user')?>">Debes iniciar sesión para realizar el pedido</a>
     <?php elseif($carrito->articulos_total()==0): ?>
     <!--Si no hay productos en el carrito no se mostrará el botón de finalizar pedido-->
     <?php else: ?>
     <!--Se puede finalizar el pedido-->
-    <a class="btn btn-success" href="<?=base_url('index.php/ctrl_carrito/FinalizaPedido')?>">Finalizar pedido</a>
+    <a class="btn btn-success" href="<?=base_url('index.php/Ctrl_carrito/FinalizaPedido')?>">Finalizar pedido</a>
     <?php endif; ?>
     </div><br/><br/>
 </div>
